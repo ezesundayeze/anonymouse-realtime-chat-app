@@ -1,8 +1,10 @@
 //require the express module
 const express = require("express");
 const app = express();
+const dateTime = require("simple-datetime-formater");
 const bodyParser = require("body-parser");
-const chatRoute = require("./route/chatroute");
+const chatRouter = require("./route/chatroute");
+const loginRouter = require("./route/loginRoute");
 
 //require the http module
 const http = require("http").Server(app);
@@ -14,10 +16,13 @@ const port = 5000;
 
 //bodyparser middleware
 app.use(bodyParser.json());
+
 //routes
-app.use("/chats", chatRoute);
+app.use("/chats", chatRouter);
+app.use("/login", loginRouter);
+
 //set the express.static middleware
-app.use(express.static("public"));
+app.use(express.static(__dirname + "/public"));
 
 //integrating socketio
 socket = io(http);
@@ -34,10 +39,26 @@ socket.on("connection", socket => {
     console.log("user disconnected");
   });
 
+  //Someone is typing
+  socket.on("typing", data => {
+    socket.broadcast.emit("notifyTyping", {
+      user: data.user,
+      message: data.message
+    });
+  });
+
+  //when soemone stops typing
+  socket.on("stopTyping", () => {
+    socket.broadcast.emit("notifyStopTyping");
+  });
+
   socket.on("chat message", function(msg) {
     console.log("message: " + msg);
+
     //broadcast message to everyone in port:5000 except yourself.
     socket.broadcast.emit("received", { message: msg });
+
+    //save chat to the database
     connect.then(db => {
       console.log("connected correctly to the server");
       let chatMessage = new Chat({ message: msg, sender: "Anonymous" });

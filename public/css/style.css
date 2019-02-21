@@ -147,7 +147,7 @@ body {
   position: relative;
   width: 100%;
   background-color: #fff;
-  padding: 20px 20px;
+  padding: 10px 10px;
   position: absolute;
   bottom: 0;
 }
@@ -195,4 +195,17 @@ body {
 
 .message_template {
   display: none;
+}
+
+.messages > li {
+  font-size: 15px;
+  color: rgb(13, 223, 153);
+  background: #f7a30675;
+  border-radius: 5px;
+  width: fit-content;
+}
+
+.messages > span {
+  font-size: 10px;
+  font-style: italic;
 }
