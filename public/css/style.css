@@ -1,156 +1,168 @@
+/* Reset box-sizing for all elements */
 * {
   box-sizing: border-box;
 }
 
+/* Basic styles for the body */
 body {
   background-color: #edeff2;
   font-family: "Calibri", "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
+/* Styles for the chat window */
 .chat_window {
   position: absolute;
   width: calc(100% - 20px);
   max-width: 800px;
   height: 500px;
-  border-radius: 10px;
-  background-color: #fff;
+  border-radius: 12px;
+  background-color: #f8f8f8;
   left: 50%;
   top: 50%;
-  transform: translateX(-50%) translateY(-50%);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-  background-color: #f8f8f8;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
 
+/* Styles for the top menu */
 .top_menu {
   background-color: #fff;
   width: 100%;
   padding: 20px 0 15px;
-  box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 30px rgba(0, 0, 0, 0.05);
+  position: relative;
 }
+
+/* Button styles within the top menu */
 .top_menu .buttons {
   margin: 3px 0 0 20px;
   position: absolute;
 }
+
 .top_menu .buttons .button {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   display: inline-block;
-  margin-right: 10px;
+  margin-right: 12px;
   position: relative;
 }
+
 .top_menu .buttons .button.close {
   background-color: #f5886e;
 }
+
 .top_menu .buttons .button.minimize {
   background-color: #fdbf68;
 }
+
 .top_menu .buttons .button.maximize {
   background-color: #a3d063;
 }
+
 .top_menu .title {
   text-align: center;
-  color: #bcbdc0;
-  font-size: 20px;
+  color: #7d7d7d;
+  font-size: 22px;
+  font-weight: 500;
 }
 
+/* Styles for messages */
 .messages {
-  position: relative;
   list-style: none;
-  padding: 20px 10px 0 10px;
+  padding: 20px 15px 0;
   margin: 0;
-  height: 347px;
-  overflow: scroll;
+  height: 340px;
+  overflow-y: auto;
+  border-top: 1px solid #ddd;
 }
+
+/* Styles for individual messages */
 .messages .message {
   clear: both;
   overflow: hidden;
   margin-bottom: 20px;
-  transition: all 0.5s linear;
+  transition: opacity 0.5s linear;
   opacity: 0;
 }
+
+/* Styles for message avatars and text wrappers */
 .messages .message.left .avatar {
   background-color: #f5886e;
   float: left;
 }
+
 .messages .message.left .text_wrapper {
   background-color: #ffe6cb;
   margin-left: 20px;
+  padding: 15px;
+  border-radius: 8px;
 }
-.messages .message.left .text_wrapper::after,
+
 .messages .message.left .text_wrapper::before {
-  right: 100%;
+  content: "";
+  position: absolute;
+  border: 10px solid transparent;
   border-right-color: #ffe6cb;
+  top: 20px;
+  right: 100%;
 }
+
 .messages .message.left .text {
   color: #c48843;
 }
+
+/* Right-aligned messages */
 .messages .message.right .avatar {
   background-color: #fdbf68;
   float: right;
 }
+
 .messages .message.right .text_wrapper {
   background-color: #c7eafc;
   margin-right: 20px;
   float: right;
+  padding: 15px;
+  border-radius: 8px;
 }
-.messages .message.right .text_wrapper::after,
+
 .messages .message.right .text_wrapper::before {
-  left: 100%;
+  content: "";
+  position: absolute;
+  border: 10px solid transparent;
   border-left-color: #c7eafc;
+  top: 20px;
+  left: 100%;
 }
+
 .messages .message.right .text {
   color: #45829b;
 }
+
 .messages .message.appeared {
   opacity: 1;
 }
+
 .messages .message .avatar {
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   display: inline-block;
 }
-.messages .message .text_wrapper {
-  display: inline-block;
-  padding: 20px;
-  border-radius: 6px;
-  width: calc(100% - 85px);
-  min-width: 100px;
-  position: relative;
-}
-.messages .message .text_wrapper::after,
-.messages .message .text_wrapper:before {
-  top: 18px;
-  border: solid transparent;
-  content: " ";
-  height: 0;
-  width: 0;
-  position: absolute;
-  pointer-events: none;
-}
-.messages .message .text_wrapper::after {
-  border-width: 13px;
-  margin-top: 0px;
-}
-.messages .message .text_wrapper::before {
-  border-width: 15px;
-  margin-top: -2px;
-}
-.messages .message .text_wrapper .text {
-  font-size: 18px;
-  font-weight: 300;
-}
 
+/* Styles for the bottom wrapper */
 .bottom_wrapper {
-  position: relative;
-  width: 100%;
-  background-color: #fff;
-  padding: 10px 10px;
   position: absolute;
   bottom: 0;
+  width: 100%;
+  background-color: #fff;
+  padding: 10px 15px;
+  box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
 }
+
+/* Styles for message input and send button */
 .bottom_wrapper .message_input_wrapper {
   display: inline-block;
   height: 50px;
@@ -158,54 +170,60 @@ body {
   border: 1px solid #bcbdc0;
   width: calc(100% - 160px);
   position: relative;
-  padding: 0 20px;
+  padding: 0 15px;
+  background-color: #f9f9f9;
 }
+
 .bottom_wrapper .message_input_wrapper .message_input {
   border: none;
   height: 100%;
-  box-sizing: border-box;
   width: calc(100% - 40px);
   position: absolute;
-  outline-width: 0;
+  outline: none;
   color: gray;
+  padding: 0 10px;
+  background: transparent;
 }
+
 .bottom_wrapper .send_message {
   width: 140px;
   height: 50px;
   display: inline-block;
-  border-radius: 50px;
+  border-radius: 25px;
   background-color: #a3d063;
   border: 2px solid #a3d063;
   color: #fff;
   cursor: pointer;
-  transition: all 0.2s linear;
+  transition: background-color 0.3s linear, color 0.3s linear;
   text-align: center;
-  float: right;
+  line-height: 50px;
+  font-size: 18px;
 }
+
 .bottom_wrapper .send_message:hover {
   color: #a3d063;
   background-color: #fff;
-}
-.bottom_wrapper .send_message .text {
-  font-size: 18px;
-  font-weight: 300;
-  display: inline-block;
-  line-height: 48px;
+  border-color: #a3d063;
 }
 
+/* Hidden message template */
 .message_template {
   display: none;
 }
 
-.messages > li {
-  font-size: 15px;
-  color: rgb(13, 223, 153);
-  background: #f7a30675;
-  border-radius: 5px;
+/* Styles for list items and spans in messages */
+.messages>li {
+  font-size: 14px;
+  color: #fff;
+  background: #f7a306;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 10px;
   width: fit-content;
 }
 
-.messages > span {
-  font-size: 10px;
+.messages>span {
+  font-size: 12px;
   font-style: italic;
+  color: #888;
 }
